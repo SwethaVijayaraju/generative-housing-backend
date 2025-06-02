@@ -46,8 +46,7 @@ Welcome to **roominator** — your backend buddy that helps generate smart housi
    uvicorn main:app --reload
 
 5. Open http://localhost:8000/docs to explore and test the API!
-
-## 🧩 Sample Input Payload for /generate-layout
+🧩 Sample Input Payload for /generate-layout
     ```bash
     {
     "plot": { "width": 30, "depth": 40 },
