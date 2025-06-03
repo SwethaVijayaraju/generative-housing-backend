@@ -1,15 +1,11 @@
 from fastapi import FastAPI
-from models.schemas import HousingRequest
-import logging
+from fastapi.responses import JSONResponse
+from api.layout_routes import router as layout_router
 
 app = FastAPI()
 
+app.include_router(layout_router)
+
 @app.get("/")
 def root():
-    return "Welcome to generative housing project for small houses! :)"
-
-logging.basicConfig(level=logging.INFO)
-@app.post("/generate-layout")
-def generate_layout(data: HousingRequest):
-    logging.info(f"Received request: {data}")
-    return {"msg": "Input received", "rooms": data.rooms}
+    return JSONResponse(content={"status": "ok"}, status_code=200)
