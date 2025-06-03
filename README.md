@@ -9,20 +9,37 @@ Welcome to **roominator** — your backend buddy that helps generate smart housi
 ## 🚀 Tech Stack
 
 - Python 3.10+
-- FastAPI (for lightning-fast APIs)
-- Pydantic (for data validation)
-- Uvicorn (ASGI server)
+- FastAPI – for blazing-fast APIs
+- Pydantic – for clean, strict data validation
+- Uvicorn – ASGI server for local development
+- (Coming soon): SVG-based layout visualizations
 
 ---
 
 ## 🏗️ What Does It Do?
 
-- Takes plot dimensions and setback rules  
-- Accepts a list of rooms with minimum area requirements  
-- Prepares the ground for generating room layouts (coming soon!)  
-- Provides an API endpoint `/generate-layout` that accepts layout specs and returns room info  
+- Accepts plot dimensions and setback rules
+- Accepts a list of rooms with minimum area requirements
+- Calculates buildable area based on setbacks
+- Automatically places rooms using a simple greedy packing algorithm
+- Returns 2D positions (x, y) and dimensions (width, depth) of each placed room
 
 ---
+
+## 🧠 How It Works
+### 📦 Modular project structure:
+      ```bash
+      generative-housing-backend/
+      ├── main.py                         # FastAPI app setup
+      ├── api/
+      │   └── layout_routes.py            # API routing logic
+      ├── services/
+      │   └── layout_generator.py         # Core layout generation logic
+      ├── models/
+      │   └── schemas.py                  # Pydantic models for validation
+      
+   The layout engine (layout_generator.py) calculates room placement within the buildable zone using a row-wise packing method (like Tetris but for homes 🏡).
+
 
 ## ⚡ How to Run Locally
 
@@ -48,6 +65,7 @@ Welcome to **roominator** — your backend buddy that helps generate smart housi
 5. Open http://localhost:8000/docs to explore and test the API!
    Sample Input Payload for /generate-layout:
     ```bash
+    POST to /generate-layout
     {
     "plot": { "width": 30, "depth": 40 },
     "setbacks": { "front": 5, "back": 5, "sides": 3 },
@@ -60,16 +78,19 @@ Welcome to **roominator** — your backend buddy that helps generate smart housi
     }
 
 ## 🔭 What’s Next?
-- Geometry engine to calculate buildable area and smartly place rooms
-- Room adjacency and orientation logic
-- Visualization support (maybe SVG or simple web front-end)
-- AI-driven optimization to maximize space utility
+-  Geometry engine to compute layout
+-  Room adjacency & clustering logic
+-  Orientation-aware planning
+-  SVG layout visualizer (in progress!)
+-  AI optimization for better space utilization
+-  Frontend to visualize layout results
 
 ## 🦾 Why “roominator”?
-- Because it helps automate room layouts — a simple backend tool inspired by architecture, built to make early-stage housing design easier.
+- Because it terminates indecision in early design layouts 😉
+- Simple, modular, and ready to help architects and developers explore design possibilities — fast.
 
 ## 💬 Contributions & Feedback
-- Got ideas, found a bug, or just want to say hello?
-- Feel free to open an issue or submit a pull request — your input makes this project better!
+- Got ideas? Found a bug?
+- Feel free to open an issue or submit a PR — feedback is welcome!
 
-Made with ❤️ by Swetha — part architect, part coder, all about turning blueprints into bytes and having fun doing it!
+Made with ❤️ by Swetha — part architect, part coder, turning blueprints into bytes!
